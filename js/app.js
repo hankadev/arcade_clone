@@ -1,21 +1,21 @@
-// Enemies our player must avoid
+/* Enemies our player must avoid
+ * bugs are starting on the left side of the screen,
+ * only one bug per row (coordinates are given to specific bugs)
+ * speed is randomly choosen from given interval
+ */
 var Enemy = function(x, y) {
-  /* bugs are starting on the left side of the screen,
-   * only one bug per row (coordinates are given to specific bugs)
-   * speed is randomly choosen from given interval
-   */
   this.sprite = "images/enemy-bug.png";
   this.x = x;
   this.y = y;
   this.speed = Math.random() * 150 + 50;
 };
 
+/* movement from left to right is speed times dt parameter
+ * dt ensures that the game runs same for all computers
+ * if the bug reaches the right side of the canvas,
+ * the bug starts at the left side, new speed is randomly assign
+ */
 Enemy.prototype.update = function(dt) {
-  /* movement from left to right is speed times dt parameter
-   * dt ensures that the game runs same for all computers
-   * if the bug reaches the right side of the canvas,
-   * the bug starts at the left side, new speed is randomly assign
-   */
   if(this.x > 500) {
     this.x = 0;
     this.speed = Math.random() * 100 + 50;
@@ -24,42 +24,61 @@ Enemy.prototype.update = function(dt) {
   }
 };
 
-// Draw the enemy on the screen, required method for game
+/* Draw the enemy object on the screen
+ */
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+/* player initial position - last row on the canvas, in center
+ * the image for the player is defined here
+ */
 var Player = function() {
   this.sprite = "images/char-boy.png";
   this.x = 200;
   this.y = 400;
 };
 
+/* Draw the player object on the screen
+ */
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// TODO: allow player to move only within the canvas - update method
+// TODO: implement win - achieving the water - update method
+// TODO: implement the collision between bug and player!!!
 Player.prototype.update = function() {
 
 };
 
-Player.handleInput = function(key) {
-
+/* this function handles the movement of the player
+ */
+Player.prototype.handleInput = function(key) {
+  if(key === "up") {
+    this.y -= 82;
+  } else if (key === "down") {
+    this.y += 82;
+  } else if (key === "left") {
+    this.x -= 100;
+  } else if (key === "right") {
+    this.x += 100;
+  }
 };
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+/* creating 3 bugs using the Enemy object
+ * every bug is given starting coordinates
+ * define the allEnemies array with all bugs in it
+ * creating player using Player object
+ */
 var bug1 = new Enemy(0,60);
 var bug2 = new Enemy(0,145);
 var bug3 = new Enemy(0,230);
 var allEnemies = [bug1, bug2, bug3];
 var player = new Player();
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+/* listening for pressed keys
+ * calling player.handleInput() method to move the player
+ */
 document.addEventListener("keyup", function(e) {
   var allowedKeys = {
     37: "left",
@@ -67,6 +86,5 @@ document.addEventListener("keyup", function(e) {
     39: "right",
     40: "down"
   };
-
   player.handleInput(allowedKeys[e.keyCode]);
 });
