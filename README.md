@@ -11,3 +11,6 @@ Starter files provided by Udacity can be found [here](https://github.com/udacity
 * Vehicle-player collision resets the game.
 * Something happens when player wins.
 * Game objects (player and vehicles) are implemented using JavaScript object-oriented programming features.
+
+## Dependencies
+Web browser: Google Chrome (recommended), Mozilla Firefox
