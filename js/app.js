@@ -7,7 +7,7 @@ var Enemy = function(x, y) {
   this.sprite = "images/enemy-bug.png";
   this.x = x;
   this.y = y;
-  this.speed = Math.random() * 150 + 50;
+  this.speed = Math.random() * 250 + 100;
 };
 
 /* movement from left to right is speed times dt parameter
@@ -45,7 +45,6 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// TODO: allow player to move only within the canvas - update method
 // TODO: implement win - achieving the water - update method
 // TODO: implement the collision between bug and player!!!
 Player.prototype.update = function() {
@@ -55,13 +54,13 @@ Player.prototype.update = function() {
 /* this function handles the movement of the player
  */
 Player.prototype.handleInput = function(key) {
-  if(key === "up") {
+  if ((key === "up") && (this.y >= 72)) {
     this.y -= 82;
-  } else if (key === "down") {
+  } else if ((key === "down") && (this.y <= 318)) {
     this.y += 82;
-  } else if (key === "left") {
+  } else if ((key === "left") && (this.x >= 100)) {
     this.x -= 100;
-  } else if (key === "right") {
+  } else if ((key === "right") && (this.x <= 300)) {
     this.x += 100;
   }
 };
@@ -71,9 +70,12 @@ Player.prototype.handleInput = function(key) {
  * creating player using Player object
  */
 var bug1 = new Enemy(0,60);
-var bug2 = new Enemy(0,145);
-var bug3 = new Enemy(0,230);
-var allEnemies = [bug1, bug2, bug3];
+var bug2 = new Enemy(100,145);
+var bug3 = new Enemy(150,230);
+var bug4 = new Enemy(300,60);
+var bug5 = new Enemy(200,145);
+var bug6 = new Enemy(400,230);
+var allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
 var player = new Player();
 
 /* listening for pressed keys
