@@ -1,3 +1,7 @@
 body {
-    text-align: center;
+  text-align: center;
+}
+
+.lives {
+  margin-left: 100px;
 }

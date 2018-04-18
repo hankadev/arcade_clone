@@ -37,6 +37,8 @@ var Player = function() {
   this.sprite = "images/char-boy.png";
   this.x = 200;
   this.y = 400;
+  this.score = 0;
+  this.updateScore = true;
 };
 
 /* Draw the player object on the screen
@@ -45,17 +47,23 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// TODO: implement win - achieving the water - update method
 // TODO: implement the collision between bug and player!!!
 Player.prototype.update = function() {
-  // if player reaches water, put him back to initial position
-  if (this.y == -10) {
+  /* if player reaches water, put him back to initial position
+   * and increment the player score
+   */
+  if (this.y === -10 && this.updateScore === true) {
+    this.score += 100;
+    document.querySelector(".score").innerHTML = this.score;
+    player.updateScore = false;
     setTimeout(function() {
       player.y = 400;
       player.x = 200;
+      player.updateScore = true;
     }, 150);
   }
 };
+
 
 /* this function handles the movement of the player
  */
