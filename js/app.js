@@ -22,6 +22,11 @@ Enemy.prototype.update = function(dt) {
   } else {
     this.x = this.x + this.speed * dt;
   }
+
+  if((this.y === player.y) && (this.x + 70 > player.x && this.x < player.x + 70) && (player.canCollide === true)) {
+    player.updatePlayerScore(-50);
+    player.canCollide = false;
+  }
 };
 
 /* Draw the enemy object on the screen
@@ -39,6 +44,7 @@ var Player = function() {
   this.y = 400;
   this.score = 0;
   this.updateScore = true;
+  this.canCollide = true;
 };
 
 /* Draw the player object on the screen
@@ -64,7 +70,8 @@ Player.prototype.updatePlayerScore = function(points) {
     player.y = 400;
     player.x = 200;
     player.updateScore = true;
-  }, 150);
+    player.canCollide = true;
+  }, 100);
 };
 
 
@@ -86,12 +93,12 @@ Player.prototype.handleInput = function(key) {
  * define the allEnemies array with all bugs in it
  * creating player using Player object
  */
-var bug1 = new Enemy(0,60);
-var bug2 = new Enemy(100,145);
-var bug3 = new Enemy(0,230);
-var bug4 = new Enemy(200,60);
-var bug5 = new Enemy(300,145);
-var bug6 = new Enemy(200,230);
+var bug1 = new Enemy(0,72);
+var bug2 = new Enemy(100,154);
+var bug3 = new Enemy(0,236);
+var bug4 = new Enemy(200,72);
+var bug5 = new Enemy(300,154);
+var bug6 = new Enemy(200,236);
 var allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
 var player = new Player();
 
