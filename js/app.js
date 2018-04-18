@@ -47,21 +47,24 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// TODO: implement the collision between bug and player!!!
 Player.prototype.update = function() {
   /* if player reaches water, put him back to initial position
    * and increment the player score
    */
   if (this.y === -10 && this.updateScore === true) {
-    this.score += 100;
-    document.querySelector(".score").innerHTML = this.score;
-    player.updateScore = false;
-    setTimeout(function() {
-      player.y = 400;
-      player.x = 200;
-      player.updateScore = true;
-    }, 150);
+    this.updatePlayerScore(100);
   }
+};
+
+Player.prototype.updatePlayerScore = function(points) {
+  player.score += points;
+  document.querySelector(".score").innerHTML = player.score;
+  player.updateScore = false;
+  setTimeout(function() {
+    player.y = 400;
+    player.x = 200;
+    player.updateScore = true;
+  }, 150);
 };
 
 
