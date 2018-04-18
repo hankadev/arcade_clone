@@ -7,7 +7,7 @@ var Enemy = function(x, y) {
   this.sprite = "images/enemy-bug.png";
   this.x = x;
   this.y = y;
-  this.speed = Math.random() * 250 + 100;
+  this.speed = Math.random() * 150 + 50;
 };
 
 /* movement from left to right is speed times dt parameter
@@ -18,7 +18,7 @@ var Enemy = function(x, y) {
 Enemy.prototype.update = function(dt) {
   if(this.x > 500) {
     this.x = 0;
-    this.speed = Math.random() * 100 + 50;
+    this.speed = Math.random() * 150 + 50;
   } else {
     this.x = this.x + this.speed * dt;
   }
@@ -48,7 +48,13 @@ Player.prototype.render = function() {
 // TODO: implement win - achieving the water - update method
 // TODO: implement the collision between bug and player!!!
 Player.prototype.update = function() {
-
+  // if player reaches water, put him back to initial position
+  if (this.y == -10) {
+    setTimeout(function() {
+      player.y = 400;
+      player.x = 200;
+    }, 150);
+  }
 };
 
 /* this function handles the movement of the player
@@ -64,17 +70,17 @@ Player.prototype.handleInput = function(key) {
     this.x += 100;
   }
 };
-/* creating 3 bugs using the Enemy object
+/* creating bugs using the Enemy object
  * every bug is given starting coordinates
  * define the allEnemies array with all bugs in it
  * creating player using Player object
  */
 var bug1 = new Enemy(0,60);
 var bug2 = new Enemy(100,145);
-var bug3 = new Enemy(150,230);
-var bug4 = new Enemy(300,60);
-var bug5 = new Enemy(200,145);
-var bug6 = new Enemy(400,230);
+var bug3 = new Enemy(0,230);
+var bug4 = new Enemy(200,60);
+var bug5 = new Enemy(300,145);
+var bug6 = new Enemy(200,230);
 var allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
 var player = new Player();
 
