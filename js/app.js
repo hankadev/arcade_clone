@@ -25,6 +25,7 @@ Enemy.prototype.update = function(dt) {
 
   if((this.y === player.y) && (this.x + 75 > player.x && this.x < player.x + 75) && (player.updatePlayer === true)) {
     player.updatePlayerScore(-50);
+    player.lives -= 1;
     player.updatePlayer = false;
   }
 };
@@ -43,6 +44,7 @@ let Player = function() {
   this.x = 300;
   this.y = 400;
   this.score = 0;
+  this.lives = 3;
   this.updatePlayer = true;
 };
 
@@ -59,6 +61,7 @@ Player.prototype.update = function() {
   if (this.y === -10 && this.updatePlayer === true) {
     this.updatePlayerScore(100);
   }
+  this.updatePlayerLives();
 };
 
 Player.prototype.updatePlayerScore = function(points) {
@@ -72,6 +75,21 @@ Player.prototype.updatePlayerScore = function(points) {
   }, 100);
 };
 
+Player.prototype.updatePlayerLives = function() {
+  let lives = document.querySelector(".lives");
+  if (this.lives === 3) {
+    lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">' +
+      '<img src="images/Heart.png" alt="heart icon">' +
+      '<img src="images/Heart.png" alt="heart icon">';
+  } else if (this.lives === 2) {
+    lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">' +
+      '<img src="images/Heart.png" alt="heart icon">'
+  } else if (this.lives === 1) {
+    lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">'
+  }  else {
+    lives.innerHTML = "";
+  }
+};
 
 /* this function handles the movement of the player
  */
