@@ -3,11 +3,11 @@
  * only one bug per row (coordinates are given to specific bugs)
  * speed is randomly choosen from given interval
  */
-var Enemy = function(x, y) {
+let Enemy = function(x, y) {
   this.sprite = "images/enemy-bug.png";
   this.x = x;
   this.y = y;
-  this.speed = Math.random() * 150 + 50;
+  this.speed = Math.random() * 200 + 50;
 };
 
 /* movement from left to right is speed times dt parameter
@@ -16,16 +16,16 @@ var Enemy = function(x, y) {
  * the bug starts at the left side, new speed is randomly assign
  */
 Enemy.prototype.update = function(dt) {
-  if(this.x > 500) {
-    this.x = 0;
-    this.speed = Math.random() * 150 + 50;
+  if(this.x > 700) {
+    this.x = -100;
+    this.speed = Math.random() * 200 + 50;
   } else {
     this.x = this.x + this.speed * dt;
   }
 
-  if((this.y === player.y) && (this.x + 70 > player.x && this.x < player.x + 70) && (player.canCollide === true)) {
+  if((this.y === player.y) && (this.x + 75 > player.x && this.x < player.x + 75) && (player.updatePlayer === true)) {
     player.updatePlayerScore(-50);
-    player.canCollide = false;
+    player.updatePlayer = false;
   }
 };
 
@@ -38,13 +38,12 @@ Enemy.prototype.render = function() {
 /* player initial position - last row on the canvas, in center
  * the image for the player is defined here
  */
-var Player = function() {
+let Player = function() {
   this.sprite = "images/char-boy.png";
-  this.x = 200;
+  this.x = 300;
   this.y = 400;
   this.score = 0;
-  this.updateScore = true;
-  this.canCollide = true;
+  this.updatePlayer = true;
 };
 
 /* Draw the player object on the screen
@@ -57,7 +56,7 @@ Player.prototype.update = function() {
   /* if player reaches water, put him back to initial position
    * and increment the player score
    */
-  if (this.y === -10 && this.updateScore === true) {
+  if (this.y === -10 && this.updatePlayer === true) {
     this.updatePlayerScore(100);
   }
 };
@@ -65,12 +64,11 @@ Player.prototype.update = function() {
 Player.prototype.updatePlayerScore = function(points) {
   player.score += points;
   document.querySelector(".score").innerHTML = player.score;
-  player.updateScore = false;
+  player.updatePlayer = false;
   setTimeout(function() {
     player.y = 400;
-    player.x = 200;
-    player.updateScore = true;
-    player.canCollide = true;
+    player.x = 300;
+    player.updatePlayer = true;
   }, 100);
 };
 
@@ -93,20 +91,22 @@ Player.prototype.handleInput = function(key) {
  * define the allEnemies array with all bugs in it
  * creating player using Player object
  */
-var bug1 = new Enemy(0,72);
-var bug2 = new Enemy(100,154);
-var bug3 = new Enemy(0,236);
-var bug4 = new Enemy(200,72);
-var bug5 = new Enemy(300,154);
-var bug6 = new Enemy(200,236);
-var allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6];
-var player = new Player();
+let bug1 = new Enemy(0,72);
+let bug2 = new Enemy(200,154);
+let bug3 = new Enemy(100,236);
+let bug4 = new Enemy(100, 318);
+let bug5 = new Enemy(500,72);
+let bug6 = new Enemy(300,154);
+let bug7 = new Enemy(400,236);
+let bug8 = new Enemy(600, 318);
+let allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6, bug7, bug8];
+let player = new Player();
 
 /* listening for pressed keys
  * calling player.handleInput() method to move the player
  */
 document.addEventListener("keyup", function(e) {
-  var allowedKeys = {
+  let allowedKeys = {
     37: "left",
     38: "up",
     39: "right",

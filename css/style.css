@@ -1,7 +1,14 @@
 body {
   text-align: center;
+  font-family: "Gugi", cursive;
+  color: #039;
+  font-weight: bold;
 }
 
-.lives {
-  margin-left: 100px;
+.score {
+  margin-right: 100px;
+}
+
+.lives img {
+  height: 40px;
 }
