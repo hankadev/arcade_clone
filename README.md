@@ -14,7 +14,7 @@ Starter files provided by Udacity can be found [here](https://github.com/udacity
 * Something happens when player wins.
 * Game objects (player and vehicles) are implemented using JavaScript object-oriented programming features.
 
-## How to player
+## How to play
 * download the repository to your local machine and open the index.html file in your browser
 * if you do not want to download it, you can play the game [in browser](https://hanny21.github.io/arcade_clone/)
 * you have 3 lives, your goal is to score as many points as possible
