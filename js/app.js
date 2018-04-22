@@ -59,7 +59,7 @@ Player.prototype.update = function() {
    * and increment the player score
    */
   if (this.y === -10 && this.updatePlayer === true) {
-    this.updatePlayerScore(100);
+    this.updatePlayerScore(50);
   }
   this.updatePlayerLives();
 };
@@ -114,10 +114,39 @@ Player.prototype.handleInput = function(key) {
     this.y += 82;
   } else if ((key === "left") && (this.x >= 100)) {
     this.x -= 100;
-  } else if ((key === "right") && (this.x <= 300)) {
+  } else if ((key === "right") && (this.x <= 500)) {
     this.x += 100;
   }
 };
+
+/* Stars - randomly positioned within the canvas
+ */
+let Star = function() {
+  this.sprite = "images/Star.png";
+  this.x = Math.floor(Math.random() * 7) * 100;
+  let starWidth = [72, 154, 236, 318];
+  this.y = starWidth[Math.floor(Math.random() * 4)];
+};
+
+/* Draw the star object on the screen
+ */
+Star.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Star.prototype.update = function() {
+  /* player - star collision => increment player score
+   * and reposition the star
+   */
+  if((this.y === player.y) && (this.x + 75 > player.x && this.x < player.x + 75)) {
+    player.score += 100;
+    document.querySelector(".score").innerHTML = player.score;
+    this.x = Math.floor(Math.random() * 7) * 100;
+    let starWidth = [72, 154, 236, 318];
+    this.y = starWidth[Math.floor(Math.random() * 4)];
+  }
+};
+
 /* creating bugs using the Enemy object
  * every bug is given starting coordinates
  * define the allEnemies array with all bugs in it
@@ -133,6 +162,10 @@ let bug7 = new Enemy(400,236);
 let bug8 = new Enemy(600, 318);
 let allEnemies = [bug1, bug2, bug3, bug4, bug5, bug6, bug7, bug8];
 let player = new Player();
+let star1 = new Star();
+let star2 = new Star();
+let star3 = new Star();
+let allStars = [star1, star2, star3];
 
 /* listening for pressed keys
  * calling player.handleInput() method to move the player
