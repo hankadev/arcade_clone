@@ -83,11 +83,25 @@ Player.prototype.updatePlayerLives = function() {
       '<img src="images/Heart.png" alt="heart icon">';
   } else if (this.lives === 2) {
     lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">' +
-      '<img src="images/Heart.png" alt="heart icon">'
+      '<img src="images/Heart.png" alt="heart icon">';
   } else if (this.lives === 1) {
-    lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">'
+    lives.innerHTML = '<img src="images/Heart.png" alt="heart icon">';
   }  else {
     lives.innerHTML = "";
+    // stop the game when player has no lives
+    allEnemies.forEach(function(enemy) {
+      enemy.speed = 0;
+    });
+    // show modal with player score and restart button
+    let modalScore = document.querySelector(".modalScore");
+    modalScore.innerHTML = player.score;
+    let modal = document.querySelector(".modalWindow");
+    modal.style.display = "flex";
+    // add event listener to replay button to restart the game
+    let replay = document.querySelector(".replay");
+    replay.addEventListener("click", function() {
+      window.location.reload(false);
+    });
   }
 };
 
