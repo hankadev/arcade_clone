@@ -3,7 +3,7 @@ This is my project for Udacity's Front-End Web Developer Nanodegree Program.
 
 Starter files provided by Udacity can be found [here](https://github.com/udacity/frontend-nanodegree-arcade-game)
 
-[view project in browser](https://hanny21.github.io/arcade_clone/)
+[view project in browser](https://hankadev.github.io/arcade_clone/)
 
 ## Project Criterias
 * The game functions correctly and runs error free.
